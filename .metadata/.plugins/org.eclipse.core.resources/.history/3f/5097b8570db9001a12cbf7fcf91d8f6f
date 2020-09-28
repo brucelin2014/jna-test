@@ -1,0 +1,19 @@
+package test_jna;
+
+import com.sun.jna.Library;
+import com.sun.jna.Native;
+
+public class test {
+	public interface Dll extends Library{		
+		Dll instance = (Dll)Native.loadLibrary("dev_printer", Dll.class);
+		public int add(int a,int b);
+		public int substract(int a,int b);
+		public void printHello();
+	}
+	
+	public static void main(String[]args)
+	{
+		System.out.println("hello");
+	}
+	
+}

@@ -1,0 +1,29 @@
+package test_jna;
+
+import com.sun.jna.Library;
+import com.sun.jna.Native;
+
+public class test {
+	public interface Dll extends Library{		
+		Dll instance = (Dll)Native.loadLibrary("dev_printer", Dll.class);
+		
+		public int init_dev(String dev, String prt_cfg);
+		public int dev_oper(String dev, String cmd);
+		public int get_dev_status(String dev, int status);
+		public int printer_version();
+	}
+	
+	public static void main(String[]args)
+	{
+		String dev = "<?xml version = \"1.0\" encoding=\"UTF-8\"?><dev><dev_id>GP-58MBIII</dev_id><dev_type>3</dev_type><dev_host_addr></dev_host_addr><dev_addr>com7,9600,99</dev_addr><dev_addr_type>1</dev_addr_type><dev_model></dev_model></dev>";
+		String prt_cfg = "";
+		String cmd = "";
+		
+		Dll.instance.init_dev(dev, prt_cfg);
+		Dll.instance.dev_oper(dev, cmd);
+		
+		int version = Dll.instance.printer_version();
+		System.out.println("version " + version);
+	}
+	
+}
